@@ -25,7 +25,8 @@ public class SampleGattAttributes {
     private static HashMap<String, String> attributes = new HashMap();
     /**public static String HEART_RATE_MEASUREMENT = "00002a37-0000-1000-8000-00805f9b34fb";
      **/
-    public static String CLIENT_CHARACTERISTIC_CONFIG = "00002902-0000-1000-8000-00805f9b34fb";
+   // public static String CLIENT_CHARACTERISTIC_CONFIG = "00002902-0000-1000-8000-00805f9b34fb";
+    public static String SENSOR_SERVICE = "7280d0b4-c973-11e4-8731-1681e6b88ec1";
 
     public static String GYRO = "b928ceee-ca32-11e4-8731-1681e6b88ec1";
     public static String MAG ="b928cc14-ca32-11e4-8731-1681e6b88ec1";
@@ -40,9 +41,10 @@ public class SampleGattAttributes {
         attributes.put(HEART_RATE_MEASUREMENT, "Heart Rate Measurement");
         attributes.put("00002a29-0000-1000-8000-00805f9b34fb", "Manufacturer Name String");
         **/
+        attributes.put("7280d0b4-c973-11e4-8731-1681e6b88ec1", "Sensor Information Service");
         attributes.put(GYRO, "Gyro Measurement");
         attributes.put(MAG, "Magnetometer Measurement");
-        attributes.put(ACC, "Accelometer Measurement");
+        attributes.put(ACC, "Accelerometer Measurement");
         attributes.put(BAR, "Barometer Measurement");
     }
 

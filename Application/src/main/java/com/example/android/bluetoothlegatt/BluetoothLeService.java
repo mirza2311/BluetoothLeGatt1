@@ -196,7 +196,7 @@ public class BluetoothLeService extends Service {
             float x = (bar[0] << 16) | (bar[1] << 8) | bar[2];
             System.out.println("Bar : " + x);
             float X = x / 4096;
-   
+
                 intent.putExtra(EXTRA_DATA,X + " hPr" );
             }
         }
@@ -383,7 +383,7 @@ public class BluetoothLeService extends Service {
         }
         mBluetoothGatt.setCharacteristicNotification(characteristic, enabled);
         BluetoothGattDescriptor descriptor = characteristic.getDescriptor(
-                UUID.fromString(SampleGattAttributes.CLIENT_CHARACTERISTIC_CONFIG));
+                UUID.fromString(SampleGattAttributes.SENSOR_SERVICE));
 
         descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
         mBluetoothGatt.writeDescriptor(descriptor);
