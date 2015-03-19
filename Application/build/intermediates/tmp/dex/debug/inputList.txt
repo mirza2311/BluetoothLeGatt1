@@ -1,0 +1,7 @@
+C:\Users\Mirza\AndroidStudioProjects\BluetoothLeGatt1\Application\build\intermediates\classes\debug
+C:\Users\Mirza\AndroidStudioProjects\BluetoothLeGatt1\Application\build\intermediates\pre-dexed\debug\internal_impl-21.0.2-bb71fa5d73f36b203ae1e82c2e0d3f0bb0d32397.jar
+C:\Users\Mirza\AndroidStudioProjects\BluetoothLeGatt1\Application\build\intermediates\pre-dexed\debug\support-annotations-21.0.2-8f9827245043942209860cd1d3d6d31df6b18e26.jar
+C:\Users\Mirza\AndroidStudioProjects\BluetoothLeGatt1\Application\build\intermediates\pre-dexed\debug\classes-8722cd821ff0cd8cfccefadab011abaf0ca14e83.jar
+C:\Users\Mirza\AndroidStudioProjects\BluetoothLeGatt1\Application\build\intermediates\pre-dexed\debug\classes-0e5fb3225bc79b9c0c4fe5592b8f1b99d3ac9d7e.jar
+C:\Users\Mirza\AndroidStudioProjects\BluetoothLeGatt1\Application\build\intermediates\pre-dexed\debug\internal_impl-21.0.2-ad1e64b32784ef65ae18841b2c762a5626f05442.jar
+C:\Users\Mirza\AndroidStudioProjects\BluetoothLeGatt1\Application\build\intermediates\pre-dexed\debug\classes-ee70510885deca4b7b51e18cfb15db30b9e31c41.jar
