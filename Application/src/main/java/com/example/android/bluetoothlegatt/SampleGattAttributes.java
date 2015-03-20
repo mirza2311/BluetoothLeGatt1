@@ -25,8 +25,15 @@ public class SampleGattAttributes {
     private static HashMap<String, String> attributes = new HashMap();
     /**public static String HEART_RATE_MEASUREMENT = "00002a37-0000-1000-8000-00805f9b34fb";
      **/
-   // public static String CLIENT_CHARACTERISTIC_CONFIG = "00002902-0000-1000-8000-00805f9b34fb";
+    public static String CLIENT_CHARACTERISTIC_CONFIG = "00002902-0000-1000-8000-00805f9b34fb";
+    public static String DEVICE_INFORMATION= "00001800-0000-1000-8000-00805f9b34fb";
+    public static String DEVICE_NAME= "00002a00-0000-1000-8000-00805f9b34fb";
+    public static String DEVICE= "00002a01-0000-1000-8000-00805f9b34fb";
+
     public static String SENSOR_SERVICE = "7280d0b4-c973-11e4-8731-1681e6b88ec1";
+    public static String BATTERY_SERVICE = "0000180f-0000-1000-8000-00805f9b34fb";
+
+    public static String BATTERY = "00002a19-0000-1000-8000-00805f9b34fb";
 
     public static String GYRO = "b928ceee-ca32-11e4-8731-1681e6b88ec1";
     public static String MAG ="b928cc14-ca32-11e4-8731-1681e6b88ec1";
@@ -34,14 +41,14 @@ public class SampleGattAttributes {
     public static String BAR = "b928c85e-ca32-11e4-8731-1681e6b88ec1";
 
     static {
-       /** // Sample Services.
-        attributes.put("0000180d-0000-1000-8000-00805f9b34fb", "Heart Rate Service");
-        attributes.put("0000180a-0000-1000-8000-00805f9b34fb", "Device Information Service");
-        // Sample Characteristics.
-        attributes.put(HEART_RATE_MEASUREMENT, "Heart Rate Measurement");
-        attributes.put("00002a29-0000-1000-8000-00805f9b34fb", "Manufacturer Name String");
-        **/
-        attributes.put("7280d0b4-c973-11e4-8731-1681e6b88ec1", "Sensor Information Service");
+        attributes.put(DEVICE_INFORMATION, "Generic Access Service");
+        attributes.put(DEVICE_NAME, "Device Name");
+        attributes.put(DEVICE, "Device");
+
+        attributes.put(BATTERY_SERVICE, "Battery Information Service");
+        attributes.put(BATTERY, "Battery Power");
+
+        attributes.put(SENSOR_SERVICE, "Sensor Information Service");
         attributes.put(GYRO, "Gyro Measurement");
         attributes.put(MAG, "Magnetometer Measurement");
         attributes.put(ACC, "Accelerometer Measurement");

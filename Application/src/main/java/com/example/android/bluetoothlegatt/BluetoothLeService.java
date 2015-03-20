@@ -77,6 +77,12 @@ public class BluetoothLeService extends Service {
             UUID.fromString(SampleGattAttributes.ACC);
     public final static UUID UUID_BAR =
             UUID.fromString(SampleGattAttributes.BAR);
+    public final static UUID UUID_BATTERY =
+            UUID.fromString(SampleGattAttributes.BATTERY);
+    public final static UUID UUID_DEVICE_NAME =
+            UUID.fromString(SampleGattAttributes.DEVICE_NAME);
+    public final static UUID UUID_DEVICE=
+            UUID.fromString(SampleGattAttributes.DEVICE);
 
     // Implements callback methods for GATT events that the app cares about.  For example,
     // connection change and services discovered.
@@ -175,7 +181,7 @@ public class BluetoothLeService extends Service {
             double Y = V[1] * 0.000061;
             double X = V[2] * 0.000061;
 
-            DecimalFormat dX = new DecimalFormat("##00.000000");
+            DecimalFormat dX = new DecimalFormat("###0.000000");
             if (data != null && data.length > 0) {
                 intent.putExtra(EXTRA_DATA, "X: " + dX.format(X) +"\n"+ " Y: " + dX.format(Y) +"\n" +" Z: "+ dX.format(Z));
             }
@@ -192,14 +198,44 @@ public class BluetoothLeService extends Service {
                 for(byte byteChar : bar)
                     stringBuilder.append(String.format("%02X ", byteChar));
                 System.out.println(stringBuilder.toString());
-
-            float x = (bar[0] << 16) | (bar[1] << 8) | bar[2];
-            System.out.println("Bar : " + x);
+            float x = ((bar[0] << 16 ) | ((bar[1] << 8)& 0xFFFF0000) | bar[2]) ;
+                System.out.println("Bar : " + x);
             float X = x / 4096;
 
-                intent.putExtra(EXTRA_DATA,X + " hPr" );
+                intent.putExtra(EXTRA_DATA,stringBuilder.toString() + " hPr" );
+            }
+        }else if (UUID_ACC.equals(characteristic.getUuid())) {
+
+
+            final byte[] data = characteristic.getValue();
+            double[] V = getValues(data);
+            double Z = V[0] * 0.000061;
+            double Y = V[1] * 0.000061;
+            double X = V[2] * 0.000061;
+
+            DecimalFormat dX = new DecimalFormat("###0.000000");
+            if (data != null && data.length > 0) {
+                intent.putExtra(EXTRA_DATA, "X: " + dX.format(X) +"\n"+ " Y: " + dX.format(Y) +"\n" +" Z: "+ dX.format(Z));
+            }
+        }else if (UUID_BATTERY.equals(characteristic.getUuid())) {
+
+
+            final byte[] data = characteristic.getValue();
+            int procent  = data[0];
+            if (data != null && data.length > 0) {
+                final StringBuilder stringBuilder = new StringBuilder(data.length);
+                for(byte byteChar : data)
+                    stringBuilder.append(String.format("%02X ", byteChar));
+                intent.putExtra(EXTRA_DATA, procent+ " %");
+            }
+        }else if (UUID_DEVICE_NAME.equals(characteristic.getUuid())) {
+            final byte[] data = characteristic.getValue();
+            if (data != null && data.length > 0) {
+                String s = new String(data);
+                intent.putExtra(EXTRA_DATA,s);
             }
         }
+
         sendBroadcast(intent);
     }
 
@@ -382,19 +418,19 @@ public class BluetoothLeService extends Service {
             return;
         }
         mBluetoothGatt.setCharacteristicNotification(characteristic, enabled);
-        BluetoothGattDescriptor descriptor = characteristic.getDescriptor(
-                UUID.fromString(SampleGattAttributes.SENSOR_SERVICE));
+        /**BluetoothGattDescriptor descriptor = characteristic.getDescriptor(
+                UUID.fromString(SampleGattAttributes.CLIENT_CHARACTERISTIC_CONFIG));
 
         descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
         mBluetoothGatt.writeDescriptor(descriptor);
-
+**/
         // This is specific to Heart Rate Measurement.
-       // if (UUID_HEART_RATE_MEASUREMENT.equals(characteristic.getUuid())) {
-         //   BluetoothGattDescriptor descriptor = characteristic.getDescriptor(
-           //         UUID.fromString(SampleGattAttributes.CLIENT_CHARACTERISTIC_CONFIG));
-            //descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
-            //mBluetoothGatt.writeDescriptor(descriptor);
-       // }
+        if ((!UUID_BATTERY.equals(characteristic.getUuid())) && (!UUID_DEVICE_NAME.equals(characteristic.getUuid())) && (!UUID_DEVICE.equals(characteristic.getUuid()))) {
+           BluetoothGattDescriptor descriptor = characteristic.getDescriptor(
+                    UUID.fromString(SampleGattAttributes.CLIENT_CHARACTERISTIC_CONFIG));
+            descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+            mBluetoothGatt.writeDescriptor(descriptor);
+        }
     }
 
     /**
