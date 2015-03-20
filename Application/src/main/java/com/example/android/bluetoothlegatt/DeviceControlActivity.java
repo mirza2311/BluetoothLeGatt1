@@ -34,6 +34,7 @@ import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -207,9 +208,11 @@ public class DeviceControlActivity extends Activity {
         if (mConnected) {
             menu.findItem(R.id.menu_connect).setVisible(false);
             menu.findItem(R.id.menu_disconnect).setVisible(true);
+            menu.findItem(R.id.TCPIP).setVisible(true);
         } else {
             menu.findItem(R.id.menu_connect).setVisible(true);
             menu.findItem(R.id.menu_disconnect).setVisible(false);
+            menu.findItem(R.id.TCPIP).setVisible(false);
         }
         return true;
     }
@@ -223,6 +226,10 @@ public class DeviceControlActivity extends Activity {
             case R.id.menu_disconnect:
                 mBluetoothLeService.disconnect();
                 return true;
+            case R.id.TCPIP:
+                Toast.makeText(this, ">>>>>COMMING SOON!!!<<<<<", Toast.LENGTH_SHORT).show();
+                return true;
+
             case android.R.id.home:
                 onBackPressed();
                 return true;
