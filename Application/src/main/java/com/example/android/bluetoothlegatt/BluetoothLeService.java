@@ -157,6 +157,7 @@ public class BluetoothLeService extends Service {
 
             if (data != null && data.length > 0) {
                 intent.putExtra(EXTRA_DATA,"X: " + dX.format(X) +"\n"+  " Y: " + dX.format(Y) +"\n"+  " Z: "+ dX.format(Z));
+
             }
         } else if (UUID_MAG.equals(characteristic.getUuid())) {
 
@@ -212,10 +213,13 @@ public class BluetoothLeService extends Service {
             double Z = V[0] * 0.000061;
             double Y = V[1] * 0.000061;
             double X = V[2] * 0.000061;
-
+            SendMessage sendMessageTask = new SendMessage();
             DecimalFormat dX = new DecimalFormat("###0.000000");
             if (data != null && data.length > 0) {
                 intent.putExtra(EXTRA_DATA, "X: " + dX.format(X) +"\n"+ " Y: " + dX.format(Y) +"\n" +" Z: "+ dX.format(Z));
+                
+                sendMessageTask.setMesssage(X+" "+Y+" "+Z);
+                sendMessageTask.execute();
             }
         }else if (UUID_BATTERY.equals(characteristic.getUuid())) {
 

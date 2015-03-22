@@ -122,39 +122,48 @@ containing a value of this type.
         public static final int cardview_shadow_start_color=0x7f050003;
     }
     public static final class dimen {
-        public static final int cardview_compat_inset_shadow=0x7f060000;
-        public static final int cardview_default_elevation=0x7f060001;
-        public static final int cardview_default_radius=0x7f060002;
-        public static final int horizontal_page_margin=0x7f060003;
-        public static final int margin_huge=0x7f060004;
-        public static final int margin_large=0x7f060005;
-        public static final int margin_medium=0x7f060006;
-        public static final int margin_small=0x7f060007;
-        public static final int margin_tiny=0x7f060008;
-        public static final int vertical_page_margin=0x7f060009;
+        public static final int activity_horizontal_margin=0x7f060000;
+        public static final int activity_vertical_margin=0x7f060001;
+        public static final int cardview_compat_inset_shadow=0x7f060002;
+        public static final int cardview_default_elevation=0x7f060003;
+        public static final int cardview_default_radius=0x7f060004;
+        public static final int horizontal_page_margin=0x7f060005;
+        public static final int margin_huge=0x7f060006;
+        public static final int margin_large=0x7f060007;
+        public static final int margin_medium=0x7f060008;
+        public static final int margin_small=0x7f060009;
+        public static final int margin_tiny=0x7f06000a;
+        public static final int vertical_page_margin=0x7f06000b;
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
         public static final int tile=0x7f020001;
     }
     public static final class id {
-        public static final int TCPIP=0x7f0a0006;
-        public static final int connection_state=0x7f0a0001;
-        public static final int data_value=0x7f0a0002;
-        public static final int device_address=0x7f0a0000;
-        public static final int device_name=0x7f0a0004;
-        public static final int gatt_services_list=0x7f0a0003;
-        public static final int menu_connect=0x7f0a0007;
-        public static final int menu_disconnect=0x7f0a0008;
-        public static final int menu_refresh=0x7f0a0005;
-        public static final int menu_scan=0x7f0a0009;
-        public static final int menu_stop=0x7f0a000a;
+        public static final int TCPIP=0x7f0a000c;
+        public static final int address=0x7f0a0001;
+        public static final int button1=0x7f0a0002;
+        public static final int connect=0x7f0a0005;
+        public static final int connection_state=0x7f0a0007;
+        public static final int data_value=0x7f0a0008;
+        public static final int device_address=0x7f0a0006;
+        public static final int device_name=0x7f0a000a;
+        public static final int gatt_services_list=0x7f0a0009;
+        public static final int menu_connect=0x7f0a000d;
+        public static final int menu_disconnect=0x7f0a000e;
+        public static final int menu_refresh=0x7f0a000b;
+        public static final int menu_scan=0x7f0a000f;
+        public static final int menu_stop=0x7f0a0010;
+        public static final int message=0x7f0a0000;
+        public static final int textView=0x7f0a0003;
+        public static final int textView2=0x7f0a0004;
     }
     public static final class layout {
         public static final int actionbar_indeterminate_progress=0x7f040000;
         public static final int activity_main=0x7f040001;
-        public static final int gatt_services_characteristics=0x7f040002;
-        public static final int listitem_device=0x7f040003;
+        public static final int client_activity=0x7f040002;
+        public static final int gatt_services_characteristics=0x7f040003;
+        public static final int listitem_device=0x7f040004;
     }
     public static final class menu {
         public static final int gatt_services=0x7f090000;
