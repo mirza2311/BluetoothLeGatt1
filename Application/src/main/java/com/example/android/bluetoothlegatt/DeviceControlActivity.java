@@ -25,7 +25,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
@@ -33,21 +32,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.net.UnknownHostException;
+import com.example.android.TCP_IP.ClientActivity;
+
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -62,7 +53,8 @@ public class DeviceControlActivity extends Activity {
 
     public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME";
     public static final String EXTRAS_DEVICE_ADDRESS = "DEVICE_ADDRESS";
-    private static final int PORT = 8000;
+    public static String ip;
+    public static int por;
 
     private TextView mConnectionState;
     private TextView mDataField;
@@ -175,7 +167,7 @@ public class DeviceControlActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gatt_services_characteristics);
-        conn = (Button) findViewById(R.id.connect);
+        //conn = (Button) findViewById(R.id.connect);
          // reference to the text field
 
 
@@ -198,12 +190,12 @@ public class DeviceControlActivity extends Activity {
 
     }
 
-    public void connect(View view){
+   /** public void connect(View view){
         Intent getNameScreenIntent = new Intent(this, ClientActivity.class);
         startActivity(getNameScreenIntent);
 
     }
-
+**/
 
 
     @Override
@@ -235,7 +227,7 @@ public class DeviceControlActivity extends Activity {
         if (mConnected) {
             menu.findItem(R.id.menu_connect).setVisible(false);
             menu.findItem(R.id.menu_disconnect).setVisible(true);
-           // menu.findItem(R.id.TCPIP).setVisible(true);
+            menu.findItem(R.id.TCPIP).setVisible(true);
         } else {
             menu.findItem(R.id.menu_connect).setVisible(true);
             menu.findItem(R.id.menu_disconnect).setVisible(false);
@@ -253,10 +245,11 @@ public class DeviceControlActivity extends Activity {
             case R.id.menu_disconnect:
                 mBluetoothLeService.disconnect();
                 return true;
-           /** case R.id.TCPIP:
-                setContentView(R.layout.client_activity);
+            case R.id.TCPIP:
+                Intent getNameScreenIntent = new Intent(this, ClientActivity.class);
+                startActivity(getNameScreenIntent);
                 return true;
-**/
+
             case android.R.id.home:
                 onBackPressed();
                 return true;

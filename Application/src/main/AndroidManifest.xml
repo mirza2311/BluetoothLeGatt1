@@ -47,7 +47,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ClientActivity"
+            android:name="com.example.android.TCP_IP.ClientActivity"
             android:label="@string/app_name"/>
         <activity android:name=".DeviceControlActivity"/>
         <service android:name=".BluetoothLeService" android:enabled="true"/>

@@ -1,50 +1,58 @@
-package com.example.android.bluetoothlegatt;
+package com.example.android.TCP_IP;
 
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import java.io.IOException;
+import com.example.android.bluetoothlegatt.R;
+import com.example.android.database.*;
+
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 
 public class ClientActivity extends Activity {
     private Socket client;
     private PrintWriter printwriter;
-    private EditText textFieldMessage, textFieldAddress;
+    private EditText textFieldPort, textFieldAddress;
     private Button button;
-    private String messsage;
+    private String portNumber;
     private String ipAddress;
-    private int PORT = 4444;
+    private Socket sock;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_activity);
+        final MyDB myDB = new MyDB(this);
+        textFieldPort = (EditText) findViewById(R.id.Port); // reference to the text field
 
-        textFieldMessage = (EditText) findViewById(R.id.message); // reference to the text field
-
-        textFieldAddress = (EditText) findViewById(R.id.address);
-        button = (Button) findViewById(R.id.button1); // reference to the send button
+        textFieldAddress = (EditText) findViewById(R.id.IPaddress);
+        button = (Button) findViewById(R.id.buttonConnect); // reference to the send button
 
         // Button press event listener
         button.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                messsage = textFieldMessage.getText().toString(); // get the text message on the text field
+                portNumber = textFieldPort.getText().toString(); // get the text message on the text field
                 ipAddress = textFieldAddress.getText().toString();
-                textFieldMessage.setText(""); // Reset the text field to blank
-                SendMessage sendMessageTask = new SendMessage();
-                sendMessageTask.execute();
+                //myDB.deleteTable();
+             myDB.createRecords(ipAddress,portNumber);
+
+
+                //SendMessage sendMessageTask = new SendMessage(ipAddress, port);
+              //  sendMessageTask.setIP(ipAddress);
+               // sendMessageTask.setPORT(Integer.parseInt(portNumber));
+           Toast.makeText(getBaseContext(),"Connected", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
-
+/**
     private class SendMessage extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -69,7 +77,7 @@ public class ClientActivity extends Activity {
         }
 
     }
-
+**/
 
 
 }
