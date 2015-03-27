@@ -146,7 +146,7 @@ public class BluetoothLeService extends Service {
         // carried out as per profile specifications:
         // http://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.heart_rate_measurement.xml
         if (UUID_GYRO.equals(characteristic.getUuid())) {
-            MyDB d = new MyDB(this);
+           // MyDB d = new MyDB(this);
             SendMessage sendMessageTask = new SendMessage();
             final byte[] data = characteristic.getValue();
             double[] V = getValues(data);
@@ -157,19 +157,20 @@ public class BluetoothLeService extends Service {
             DecimalFormat dX = new DecimalFormat("###0.000");
 
             if (data != null && data.length > 0) {
-                Cursor val = d.selectRecords();
+               /** Cursor val = d.selectRecords();
                 String ip = val.getString(0);
                 String port = val.getString(1);
                 int p = Integer.parseInt(port);
                 sendMessageTask.setPORT(p);
                 sendMessageTask.setIP(ip);
+                **/
                 sendMessageTask.setMesssage(data);
                 sendMessageTask.execute();
                 intent.putExtra(EXTRA_DATA,"X: " + dX.format(X) +"\n"+  " Y: " + dX.format(Y) +"\n"+  " Z: "+ dX.format(Z));
 
             }
         } else if (UUID_MAG.equals(characteristic.getUuid())) {
-            MyDB d = new MyDB(this);
+          //  MyDB d = new MyDB(this);
            SendMessage sendMessageTask = new SendMessage();
             final byte[] data = characteristic.getValue();
             double[] V = getValues(data);
@@ -179,19 +180,20 @@ public class BluetoothLeService extends Service {
             DecimalFormat dX = new DecimalFormat("###0.0000");
 
             if (data != null && data.length > 0) {
-                Cursor val = d.selectRecords();
+               /** Cursor val = d.selectRecords();
                 String ip = val.getString(0);
                 String port = val.getString(1);
                 int p = Integer.parseInt(port);
                 sendMessageTask.setPORT(p);
                 sendMessageTask.setIP(ip);
+                **/
                 sendMessageTask.setMesssage(data);
                 sendMessageTask.execute();
                 intent.putExtra(EXTRA_DATA, "X: " + dX.format(X) +"\n"+  " Y: " + dX.format(Y) +"\n"+  " Z: "+ dX.format(Z));
 
             }
         } else if (UUID_ACC.equals(characteristic.getUuid())) {
-            MyDB d = new MyDB(this);
+            //MyDB d = new MyDB(this);
             SendMessage sendMessageTask = new SendMessage();
             final byte[] data = characteristic.getValue();
             double[] V = getValues(data);
@@ -201,18 +203,19 @@ public class BluetoothLeService extends Service {
 
             DecimalFormat dX = new DecimalFormat("###0.000000");
             if (data != null && data.length > 0) {
-                Cursor val = d.selectRecords();
+              /**  Cursor val = d.selectRecords();
                 String ip = val.getString(0);
                 String port = val.getString(1);
                 int p = Integer.parseInt(port);
                 sendMessageTask.setPORT(p);
                 sendMessageTask.setIP(ip);
+               **/
                 sendMessageTask.setMesssage(data);
                 sendMessageTask.execute();
                 intent.putExtra(EXTRA_DATA, "X: " + dX.format(X) +"\n"+ " Y: " + dX.format(Y) +"\n" +" Z: "+ dX.format(Z));
             }
         } else if (UUID_BAR.equals(characteristic.getUuid())) {
-            MyDB d = new MyDB(this);
+           // MyDB d = new MyDB(this);
             SendMessage sendMessageTask = new SendMessage();
             final byte[] data = characteristic.getValue();
             byte[] bar = new byte[3];
@@ -228,12 +231,12 @@ public class BluetoothLeService extends Service {
                 System.out.println("Bar : " + x);
             float X = x / 4096;
 
-               Cursor val = d.selectRecords();
-               String ip = val.getString(0);
-               String port = val.getString(1);
-               int p = Integer.parseInt(port);
-               sendMessageTask.setPORT(p);
-               sendMessageTask.setIP(ip);
+              // Cursor val = d.selectRecords();
+              // String ip = val.getString(0);
+              // String port = val.getString(1);
+               //int p = Integer.parseInt(port);
+              // sendMessageTask.setPORT(p);
+               //sendMessageTask.setIP(ip);
                sendMessageTask.setMesssage(data);
                sendMessageTask.execute();
                 intent.putExtra(EXTRA_DATA,stringBuilder.toString() + " hPr" );
@@ -242,19 +245,20 @@ public class BluetoothLeService extends Service {
         }else  if (UUID_BATTERY.equals(characteristic.getUuid())) {
 
             SendMessage sendMessageTask = new SendMessage();
-            MyDB d = new MyDB(this);
+            //MyDB d = new MyDB(this);
             final byte[] data = characteristic.getValue();
             int procent  = data[0];
             if (data != null && data.length > 0) {
                 final StringBuilder stringBuilder = new StringBuilder(data.length);
                 for(byte byteChar : data)
                     stringBuilder.append(String.format("%02X ", byteChar));
-                Cursor val = d.selectRecords();
+                /**Cursor val = d.selectRecords();
                 String ip = val.getString(0);
                 String port = val.getString(1);
                 int p = Integer.parseInt(port);
-                sendMessageTask.setPORT(p);
-                sendMessageTask.setIP(ip);
+                //sendMessageTask.setPORT(p);
+               // sendMessageTask.setIP(ip);
+                 **/
                 sendMessageTask.setMesssage(data);
                 sendMessageTask.execute();
                 intent.putExtra(EXTRA_DATA, procent+ " %");

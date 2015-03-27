@@ -28,7 +28,7 @@ public class ClientActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_activity);
-        final MyDB myDB = new MyDB(this);
+        //final MyDB myDB = new MyDB(this);
         textFieldPort = (EditText) findViewById(R.id.Port); // reference to the text field
 
         textFieldAddress = (EditText) findViewById(R.id.IPaddress);
@@ -41,7 +41,7 @@ public class ClientActivity extends Activity {
                 portNumber = textFieldPort.getText().toString(); // get the text message on the text field
                 ipAddress = textFieldAddress.getText().toString();
                 //myDB.deleteTable();
-             myDB.createRecords(ipAddress,portNumber);
+            // myDB.createRecords(ipAddress,portNumber);
 
 
                 //SendMessage sendMessageTask = new SendMessage(ipAddress, port);
