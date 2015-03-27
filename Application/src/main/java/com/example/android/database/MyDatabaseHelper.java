@@ -27,7 +27,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     // Method is called during creation of the database
     @Override
     public void onCreate(SQLiteDatabase database) {
-        database.execSQL("Delete from Sockets");
+        //database.execSQL("Delete from Sockets");
         String DATABASE_CREATE = "CREATE TABLE " + TABLE_CONTACTS + "("
                 + IP + " TEXT,"
                 + PORT + " TEXT" + ")";
