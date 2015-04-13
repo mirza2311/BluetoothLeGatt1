@@ -36,6 +36,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.TCP_IP.ClientActivity;
+
 import java.util.ArrayList;
 
 /**
@@ -107,6 +109,10 @@ public class DeviceScanActivity extends ListActivity {
                 break;
             case R.id.menu_stop:
                 scanLeDevice(false);
+                break;
+            case R.id.menu_tcpip:
+                Intent getNameScreenIntent = new Intent(this, ClientActivity.class);
+                startActivity(getNameScreenIntent);
                 break;
 
 

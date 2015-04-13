@@ -28,9 +28,13 @@ import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
+
+import com.example.android.TCP_IP.ClientActivity;
+import com.example.android.database.MyDB;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -38,6 +42,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.text.DecimalFormat;
+import java.util.Currency;
 import java.util.List;
 import java.util.UUID;
 
@@ -53,11 +58,12 @@ public class BluetoothLeService extends Service {
     private String mBluetoothDeviceAddress;
     private BluetoothGatt mBluetoothGatt;
     private int mConnectionState = STATE_DISCONNECTED;
-
+private ClientActivity c = new ClientActivity();
     private Socket socket;
     private DataOutputStream outputToClient;
-    private String IP = "192.168.1.68";
-    private int PORT = 8000;
+
+    private String IP ;
+    private int PORT ;
     private boolean connected;
     private DataOutputStream dao;
 
@@ -103,6 +109,12 @@ public class BluetoothLeService extends Service {
         public void run() {
 
             try {
+
+
+               System.out.println("Lenght is : "+c.getPortNumber());
+                System.out.println("Lenght is : "+c.getPortNumber2());
+                IP = c.getPortNumber();
+                PORT = Integer.parseInt(c.getPortNumber2());
                 InetAddress serverAddr = InetAddress.getByName(IP);
 
                 socket = new Socket(serverAddr, PORT);
@@ -190,7 +202,9 @@ public class BluetoothLeService extends Service {
 
             if (data != null && data.length > 0) {
                 if (data != null && data.length > 0) {
-                    writeBytesToSocket(data);
+                    if (socket != null){
+                        writeBytesToSocket(data);
+                    }
                     intent.putExtra(EXTRA_DATA, "X: " + dX.format(X) + "\n" + " Y: " + dX.format(Y) + "\n" + " Z: " + dX.format(Z));
 
                 }
@@ -210,7 +224,9 @@ public class BluetoothLeService extends Service {
 
             if (data != null && data.length > 0) {
                 if (data != null && data.length > 0) {
-                    writeBytesToSocket(data);
+                    if (socket != null){
+                        writeBytesToSocket(data);
+                    }
                     intent.putExtra(EXTRA_DATA, "X: " + dX.format(X) + "\n" + " Y: " + dX.format(Y) + "\n" + " Z: " + dX.format(Z));
 
                 }
@@ -230,7 +246,10 @@ public class BluetoothLeService extends Service {
             DecimalFormat dX = new DecimalFormat("###0.000000");
             if (data != null && data.length > 0) {
                 if (data != null && data.length > 0) {
-                    writeBytesToSocket(data);
+                    if (socket != null){
+                        writeBytesToSocket(data);
+                    }
+
                     intent.putExtra(EXTRA_DATA, "X: " + dX.format(X) + "\n" + " Y: " + dX.format(Y) + "\n" + " Z: " + dX.format(Z));
 
                 }

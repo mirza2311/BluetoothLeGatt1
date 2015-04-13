@@ -152,8 +152,9 @@ containing a value of this type.
         public static final int menu_connect=0x7f0a000c;
         public static final int menu_disconnect=0x7f0a000d;
         public static final int menu_refresh=0x7f0a000a;
-        public static final int menu_scan=0x7f0a000e;
-        public static final int menu_stop=0x7f0a000f;
+        public static final int menu_scan=0x7f0a000f;
+        public static final int menu_stop=0x7f0a0010;
+        public static final int menu_tcpip=0x7f0a000e;
         public static final int textViewIP=0x7f0a0003;
         public static final int textViewPort=0x7f0a0004;
     }

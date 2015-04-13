@@ -1,6 +1,7 @@
 package com.example.android.TCP_IP;
 
 import android.app.Activity;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,20 +16,21 @@ import java.net.Socket;
 
 
 public class ClientActivity extends Activity {
-    private Socket client;
-    private PrintWriter printwriter;
+
     private EditText textFieldPort, textFieldAddress;
     private Button button;
     private String portNumber;
+    private static String count;
     private String ipAddress;
-    private Socket sock;
+
+    private static String count1;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_activity);
-        //final MyDB myDB = new MyDB(this);
+        final MyDB   myDB = new MyDB(this);
         textFieldPort = (EditText) findViewById(R.id.Port); // reference to the text field
 
         textFieldAddress = (EditText) findViewById(R.id.IPaddress);
@@ -38,12 +40,16 @@ public class ClientActivity extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                portNumber = textFieldPort.getText().toString(); // get the text message on the text field
+         portNumber = textFieldPort.getText().toString();
+                 // get the text message on the text field
+                //portNumber = Integer.parseInt(port);
                 ipAddress = textFieldAddress.getText().toString();
                 //myDB.deleteTable();
-            // myDB.createRecords(ipAddress,portNumber);
+             myDB.createRecords(ipAddress,portNumber);
 
-
+                Cursor c = myDB.selectRecords();
+                count = c.getString(0);
+                count1 = c.getString(1);
                 //SendMessage sendMessageTask = new SendMessage(ipAddress, port);
               //  sendMessageTask.setIP(ipAddress);
                // sendMessageTask.setPORT(Integer.parseInt(portNumber));
@@ -51,6 +57,20 @@ public class ClientActivity extends Activity {
 
             }
         });
+    }
+
+    public static String getPortNumber() {
+
+        return count;
+    }
+
+    public static String getPortNumber2() {
+
+        return count1;
+    }
+
+    public String getIpAddress() {
+        return ipAddress;
     }
 /**
     private class SendMessage extends AsyncTask<Void, Void, Void> {
