@@ -276,10 +276,12 @@ private ClientActivity c = new ClientActivity();
                 for(byte byteChar : bar)
                     stringBuilder.append(String.format("%02X ", byteChar));
                 System.out.println(stringBuilder.toString());
-            float x = ((bar[0] << 16 ) | ((bar[1] << 8)& 0xFFFF0000) | bar[2]) ;
-                System.out.println("Bar : " + x);
-            float X = x / 4096;
+            long x = ((data[0] << 6 ) | (data[1] << 3) | data[2]) ;
 
+
+
+            double X = x / 4096;
+               System.out.println("Bar : " + x);
               // Cursor val = d.selectRecords();
               // String ip = val.getString(0);
               // String port = val.getString(1);
