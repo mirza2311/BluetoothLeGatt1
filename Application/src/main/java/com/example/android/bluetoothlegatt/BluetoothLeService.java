@@ -114,10 +114,13 @@ private ClientActivity c = new ClientActivity();
                System.out.println("Lenght is : "+c.getPortNumber());
                 System.out.println("Lenght is : "+c.getPortNumber2());
                 IP = c.getPortNumber();
-                PORT = Integer.parseInt(c.getPortNumber2());
-                InetAddress serverAddr = InetAddress.getByName(IP);
+                if (IP != null){
+                    PORT = Integer.parseInt(c.getPortNumber2());
+                    InetAddress serverAddr = InetAddress.getByName(IP);
 
-                socket = new Socket(serverAddr, PORT);
+                    socket = new Socket(serverAddr, PORT);
+                }
+
 
             } catch (UnknownHostException e1) {
                 e1.printStackTrace();

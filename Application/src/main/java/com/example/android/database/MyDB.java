@@ -30,7 +30,7 @@ public class MyDB{
 
 
     public long createRecords(String id, String name){
-        database.execSQL("Delete from Sockets");
+       // database.execSQL("Delete from Sockets");
         ContentValues values = new ContentValues();
         values.put(IP, id);
         values.put(PORT, name);
