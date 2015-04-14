@@ -39,6 +39,7 @@ public class SampleGattAttributes {
     public static String MAG ="b928cc14-ca32-11e4-8731-1681e6b88ec1";
     public static String ACC = "b928cab6-ca32-11e4-8731-1681e6b88ec1";
     public static String BAR = "b928c85e-ca32-11e4-8731-1681e6b88ec1";
+    public static String TEMP = "b928cd15-ca32-11e4-8731-1681e6b88ec1";
 
     static {
         attributes.put(DEVICE_INFORMATION, "Generic Access Service");
@@ -53,6 +54,7 @@ public class SampleGattAttributes {
         attributes.put(MAG, "Magnetometer Measurement");
         attributes.put(ACC, "Accelerometer Measurement");
         attributes.put(BAR, "Barometer Measurement");
+        attributes.put(TEMP, "Temperature Measurement");
     }
 
     public static String lookup(String uuid, String defaultName) {

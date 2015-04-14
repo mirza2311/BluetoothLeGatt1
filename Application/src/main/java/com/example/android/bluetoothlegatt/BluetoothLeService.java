@@ -41,6 +41,8 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.text.DecimalFormat;
 import java.util.Currency;
 import java.util.List;
@@ -92,6 +94,8 @@ private ClientActivity c = new ClientActivity();
             UUID.fromString(SampleGattAttributes.ACC);
     public final static UUID UUID_BAR =
             UUID.fromString(SampleGattAttributes.BAR);
+    public final static UUID UUID_TEMP =
+            UUID.fromString(SampleGattAttributes.TEMP);
     public final static UUID UUID_BATTERY =
             UUID.fromString(SampleGattAttributes.BATTERY);
     public final static UUID UUID_DEVICE_NAME =
@@ -296,15 +300,26 @@ private ClientActivity c = new ClientActivity();
                 final StringBuilder stringBuilder = new StringBuilder(data.length);
                 for(byte byteChar : data)
                     stringBuilder.append(String.format("%02X ", byteChar));
-                /**Cursor val = d.selectRecords();
-                String ip = val.getString(0);
-                String port = val.getString(1);
-                int p = Integer.parseInt(port);
-                //sendMessageTask.setPORT(p);
-               // sendMessageTask.setIP(ip);
-                 **/
 
                 intent.putExtra(EXTRA_DATA, procent+ " %");
+            }
+        }else if (UUID_TEMP.equals(characteristic.getUuid())) {
+
+
+            //MyDB d = new MyDB(this);
+            final byte[] data = characteristic.getValue();
+
+            double t = byteArrayToInt(data);
+            System.out.println("TEMP " + t);
+          //  int value =
+
+            if (data != null && data.length > 0) {
+                final StringBuilder stringBuilder = new StringBuilder(data.length);
+                for(byte byteChar : data)
+                    stringBuilder.append(String.format("%02X ", byteChar));
+
+
+                intent.putExtra(EXTRA_DATA, t + " C");
             }
         }else if (UUID_DEVICE_NAME.equals(characteristic.getUuid())) {
             final byte[] data = characteristic.getValue();
@@ -315,6 +330,16 @@ private ClientActivity c = new ClientActivity();
         }
 
         sendBroadcast(intent);
+    }
+
+    public double byteArrayToInt(byte[] b) {
+        double value;
+
+
+        int temp = b[1] << 8 | b[0];
+        System.out.println("TEMP1 : " + temp);
+        value = (42.5 + (temp / 480));
+        return value;
     }
 
     public double[] getValues(byte[] data){
