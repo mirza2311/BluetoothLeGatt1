@@ -28,23 +28,18 @@ import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
 import com.example.android.TCP_IP.ClientActivity;
-import com.example.android.database.MyDB;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.text.DecimalFormat;
-import java.util.Currency;
 import java.util.List;
 import java.util.UUID;
 
@@ -64,8 +59,8 @@ private ClientActivity c = new ClientActivity();
     private Socket socket;
     private DataOutputStream outputToClient;
 
-    private String IP ;
-    private int PORT ;
+    private String IP ="194.47.32.144" ;
+    private int PORT = 8000;
     private boolean connected;
     private DataOutputStream dao;
 
@@ -115,11 +110,11 @@ private ClientActivity c = new ClientActivity();
             try {
 
 
-               System.out.println("Lenght is : "+c.getPortNumber());
-                System.out.println("Lenght is : "+c.getPortNumber2());
-                IP = c.getPortNumber();
+             //  System.out.println("Lenght is : "+c.getPortNumber());
+               // System.out.println("Lenght is : "+c.getPortNumber2());
+                //IP = c.getPortNumber();
                 if (IP != null){
-                    PORT = Integer.parseInt(c.getPortNumber2());
+                    //PORT = Integer.parseInt(c.getPortNumber2());
                     InetAddress serverAddr = InetAddress.getByName(IP);
 
                     socket = new Socket(serverAddr, PORT);
@@ -275,24 +270,21 @@ private ClientActivity c = new ClientActivity();
                 final StringBuilder stringBuilder = new StringBuilder(bar.length);
                 for(byte byteChar : bar)
                     stringBuilder.append(String.format("%02X ", byteChar));
-                System.out.println(stringBuilder.toString());
-            long x = ((data[0] << 6 ) | (data[1] << 3) | data[2]) ;
 
 
+            double x = ((data[2] << 16 ) | (data[1] << 8) | data[0]) ;
 
             double X = x / 4096;
-               System.out.println("Bar : " + x);
-              // Cursor val = d.selectRecords();
-              // String ip = val.getString(0);
-              // String port = val.getString(1);
-               //int p = Integer.parseInt(port);
-              // sendMessageTask.setPORT(p);
-               //sendMessageTask.setIP(ip);
 
-                intent.putExtra(EXTRA_DATA,stringBuilder.toString() + " hPr" );
 
+            double meter = X / 98.04;
+               DecimalFormat dX = new DecimalFormat("###0.000");
+               if ((X != 0) && (X > 0)) {
+                   intent.putExtra(EXTRA_DATA, dX.format(X) + " hPa " + dX.format(meter) + " m");
+               }
             }
         }else  if (UUID_BATTERY.equals(characteristic.getUuid())) {
+
 
 
             //MyDB d = new MyDB(this);
@@ -311,7 +303,7 @@ private ClientActivity c = new ClientActivity();
             //MyDB d = new MyDB(this);
             final byte[] data = characteristic.getValue();
 
-            double t = byteArrayToInt(data);
+            double t = byteArrayToDouble(data);
             System.out.println("TEMP " + t);
           //  int value =
 
@@ -334,7 +326,7 @@ private ClientActivity c = new ClientActivity();
         sendBroadcast(intent);
     }
 
-    public double byteArrayToInt(byte[] b) {
+    public double byteArrayToDouble(byte[] b) {
         double value;
 
 
