@@ -22,6 +22,7 @@ public class ClientActivity extends Activity {
     private String portNumber;
     private static String count;
     private String ipAddress;
+    private static int koliko;
 
     private static String count1;
 
@@ -48,8 +49,9 @@ public class ClientActivity extends Activity {
              myDB.createRecords(ipAddress,portNumber);
 
                 Cursor c = myDB.selectRecords();
-                count = c.getString(0);
-                count1 = c.getString(1);
+                koliko= c.getCount();
+                count = c.getString(c.getCount()-1);
+                count1 = c.getString(c.getCount());
                 //SendMessage sendMessageTask = new SendMessage(ipAddress, port);
               //  sendMessageTask.setIP(ipAddress);
                // sendMessageTask.setPORT(Integer.parseInt(portNumber));
@@ -62,6 +64,11 @@ public class ClientActivity extends Activity {
     public static String getPortNumber() {
 
         return count;
+    }
+
+    public static int getKoliko() {
+
+        return koliko;
     }
 
     public static String getPortNumber2() {

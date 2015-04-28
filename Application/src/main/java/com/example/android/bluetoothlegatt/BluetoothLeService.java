@@ -59,7 +59,7 @@ private ClientActivity c = new ClientActivity();
     private Socket socket;
     private DataOutputStream outputToClient;
 
-    private String IP ="194.47.32.144" ;
+    private String IP ="194.47.32.106"  ;
     private int PORT = 8000;
     private boolean connected;
     private DataOutputStream dao;
@@ -110,11 +110,12 @@ private ClientActivity c = new ClientActivity();
             try {
 
 
-             //  System.out.println("Lenght is : "+c.getPortNumber());
+              //System.out.println("Lenght is : "+c.getPortNumber());
                // System.out.println("Lenght is : "+c.getPortNumber2());
+                //System.out.println("kolikocina je: "+c.getKoliko());
                 //IP = c.getPortNumber();
                 if (IP != null){
-                    //PORT = Integer.parseInt(c.getPortNumber2());
+                  //  PORT = Integer.parseInt(c.getPortNumber2());
                     InetAddress serverAddr = InetAddress.getByName(IP);
 
                     socket = new Socket(serverAddr, PORT);
@@ -184,13 +185,14 @@ private ClientActivity c = new ClientActivity();
         sendBroadcast(intent);
     }
 
+
+
     private void broadcastUpdate(final String action,
                                  final BluetoothGattCharacteristic characteristic) {
         final Intent intent = new Intent(action);
 
-        // This is special handling for the Heart Rate Measurement profile.  Data parsing is
-        // carried out as per profile specifications:
-        // http://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.heart_rate_measurement.xml
+       // byte[] d = characteristic.getValue();
+        //writeBytesToSocket(d);
         if (UUID_GYRO.equals(characteristic.getUuid())) {
            // MyDB d = new MyDB(this);
 
@@ -205,14 +207,12 @@ private ClientActivity c = new ClientActivity();
             if (data != null && data.length > 0) {
                 if (data != null && data.length > 0) {
                     if (socket != null){
+                        writeIntToSocket(3);
                         writeBytesToSocket(data);
                     }
                     intent.putExtra(EXTRA_DATA, "X: " + dX.format(X) + "\n" + " Y: " + dX.format(Y) + "\n" + " Z: " + dX.format(Z));
 
                 }
-
-
-
             }
         } else if (UUID_MAG.equals(characteristic.getUuid())) {
           //  MyDB d = new MyDB(this);
@@ -227,19 +227,18 @@ private ClientActivity c = new ClientActivity();
             if (data != null && data.length > 0) {
                 if (data != null && data.length > 0) {
                     if (socket != null){
+                        writeIntToSocket(2);
                         writeBytesToSocket(data);
                     }
                     intent.putExtra(EXTRA_DATA, "X: " + dX.format(X) + "\n" + " Y: " + dX.format(Y) + "\n" + " Z: " + dX.format(Z));
-
                 }
-
-
-
             }
         } else if (UUID_ACC.equals(characteristic.getUuid())) {
             //MyDB d = new MyDB(this);
 
             final byte[] data = characteristic.getValue();
+           // final byte[] sensor = new byte[1];
+            //sensor[] = 1;
             double[] V = getValues(data);
             double Z = V[0] * 0.000061;
             double Y = V[1] * 0.000061;
@@ -249,14 +248,15 @@ private ClientActivity c = new ClientActivity();
             if (data != null && data.length > 0) {
                 if (data != null && data.length > 0) {
                     if (socket != null){
+                        //writeBytesToSocket(sensor);
+
+                        writeIntToSocket(1);
+
                         writeBytesToSocket(data);
                     }
 
                     intent.putExtra(EXTRA_DATA, "X: " + dX.format(X) + "\n" + " Y: " + dX.format(Y) + "\n" + " Z: " + dX.format(Z));
-
                 }
-
-
             }
         } else if (UUID_BAR.equals(characteristic.getUuid())) {
            // MyDB d = new MyDB(this);
@@ -281,6 +281,13 @@ private ClientActivity c = new ClientActivity();
                DecimalFormat dX = new DecimalFormat("###0.000");
                if ((X != 0) && (X > 0)) {
                    intent.putExtra(EXTRA_DATA, dX.format(X) + " hPa " + dX.format(meter) + " m");
+                   if (socket != null){
+                       writeIntToSocket(4);
+                       writeBytesToSocket(data);
+
+
+                   }
+
                }
             }
         }else  if (UUID_BATTERY.equals(characteristic.getUuid())) {
@@ -305,16 +312,18 @@ private ClientActivity c = new ClientActivity();
 
             double t = byteArrayToDouble(data);
             System.out.println("TEMP " + t);
-          //  int value =
+
+
 
             if (data != null && data.length > 0) {
-                final StringBuilder stringBuilder = new StringBuilder(data.length);
-                for(byte byteChar : data)
-                    stringBuilder.append(String.format("%02X ", byteChar));
-
+                if (socket != null){
+                    writeIntToSocket(5);
+                    writeBytesToSocket(data);
+                }
 
                 intent.putExtra(EXTRA_DATA, t + " C");
             }
+
         }else if (UUID_DEVICE_NAME.equals(characteristic.getUuid())) {
             final byte[] data = characteristic.getValue();
             if (data != null && data.length > 0) {
@@ -330,7 +339,7 @@ private ClientActivity c = new ClientActivity();
         double value;
 
 
-        int temp = b[1] << 8 | b[0];
+        int temp =( (b[1] << 8) | b[0]);
         System.out.println("TEMP1 : " + temp);
         value = (42.5 + (temp / 480));
         return value;
@@ -376,6 +385,17 @@ private ClientActivity c = new ClientActivity();
         try {
             dao = new DataOutputStream(socket.getOutputStream());
             dao.write(data);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void writeIntToSocket(int data) {
+        try {
+            dao = new DataOutputStream(socket.getOutputStream());
+            dao.write(data);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

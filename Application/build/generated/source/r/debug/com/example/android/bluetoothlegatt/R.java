@@ -164,6 +164,7 @@ containing a value of this type.
         public static final int client_activity=0x7f040002;
         public static final int gatt_services_characteristics=0x7f040003;
         public static final int listitem_device=0x7f040004;
+        public static final int read_all_activity=0x7f040005;
     }
     public static final class menu {
         public static final int gatt_services=0x7f090000;
