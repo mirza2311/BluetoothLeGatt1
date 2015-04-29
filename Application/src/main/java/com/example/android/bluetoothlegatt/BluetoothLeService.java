@@ -59,7 +59,7 @@ public class BluetoothLeService extends Service {
     private Socket socket;
     private DataOutputStream outputToClient;
 
-    private String IP ="194.47.32.106"  ;
+    private String IP ="192.168.1.68"  ;
     private int PORT = 8000;
     private boolean connected;
     private DataOutputStream dao;
@@ -340,7 +340,7 @@ public class BluetoothLeService extends Service {
         double value;
 
 
-        int temp =( (b[1] << 8) | b[0]);
+        int temp =( (b[1]*256) + b[0]);
         System.out.println("TEMP1 : " + temp);
         value = (42.5 + (temp / 480));
         return value;
