@@ -35,6 +35,7 @@ import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.TCP_IP.ClientActivity;
 
@@ -53,12 +54,10 @@ public class DeviceControlActivity extends Activity {
 
     public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME";
     public static final String EXTRAS_DEVICE_ADDRESS = "DEVICE_ADDRESS";
-    public static String ip;
-    public static int por;
 
     private TextView mConnectionState;
     private TextView mDataField;
-    private Button conn;
+    private Button readAll;
     private String mDeviceName;
     private String mDeviceAddress;
     private ExpandableListView mGattServicesList;
@@ -187,6 +186,16 @@ public class DeviceControlActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
         Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
+        readAll = (Button) findViewById(R.id.readAll);
+        readAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Toast toast = Toast.makeText(getApplicationContext(), "test button click",Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
 
     }
 

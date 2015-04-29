@@ -55,7 +55,7 @@ public class BluetoothLeService extends Service {
     private String mBluetoothDeviceAddress;
     private BluetoothGatt mBluetoothGatt;
     private int mConnectionState = STATE_DISCONNECTED;
-private ClientActivity c = new ClientActivity();
+    private ClientActivity c = new ClientActivity();
     private Socket socket;
     private DataOutputStream outputToClient;
 
@@ -79,8 +79,8 @@ private ClientActivity c = new ClientActivity();
     public final static String EXTRA_DATA =
             "com.example.bluetooth.le.EXTRA_DATA";
 
-   /** public final static UUID UUID_HEART_RATE_MEASUREMENT =
-            UUID.fromString(SampleGattAttributes.HEART_RATE_MEASUREMENT);**/
+    /** public final static UUID UUID_HEART_RATE_MEASUREMENT =
+     UUID.fromString(SampleGattAttributes.HEART_RATE_MEASUREMENT);**/
     public final static UUID UUID_GYRO =
             UUID.fromString(SampleGattAttributes.GYRO);
     public final static UUID UUID_MAG =
@@ -110,12 +110,12 @@ private ClientActivity c = new ClientActivity();
             try {
 
 
-              //System.out.println("Lenght is : "+c.getPortNumber());
-               // System.out.println("Lenght is : "+c.getPortNumber2());
+                //System.out.println("Lenght is : "+c.getPortNumber());
+                // System.out.println("Lenght is : "+c.getPortNumber2());
                 //System.out.println("kolikocina je: "+c.getKoliko());
                 //IP = c.getPortNumber();
                 if (IP != null){
-                  //  PORT = Integer.parseInt(c.getPortNumber2());
+                    //  PORT = Integer.parseInt(c.getPortNumber2());
                     InetAddress serverAddr = InetAddress.getByName(IP);
 
                     socket = new Socket(serverAddr, PORT);
@@ -191,10 +191,10 @@ private ClientActivity c = new ClientActivity();
                                  final BluetoothGattCharacteristic characteristic) {
         final Intent intent = new Intent(action);
 
-       // byte[] d = characteristic.getValue();
+        // byte[] d = characteristic.getValue();
         //writeBytesToSocket(d);
         if (UUID_GYRO.equals(characteristic.getUuid())) {
-           // MyDB d = new MyDB(this);
+            // MyDB d = new MyDB(this);
 
             final byte[] data = characteristic.getValue();
             double[] V = getValues(data);
@@ -215,7 +215,7 @@ private ClientActivity c = new ClientActivity();
                 }
             }
         } else if (UUID_MAG.equals(characteristic.getUuid())) {
-          //  MyDB d = new MyDB(this);
+            //  MyDB d = new MyDB(this);
 
             final byte[] data = characteristic.getValue();
             double[] V = getValues(data);
@@ -237,7 +237,8 @@ private ClientActivity c = new ClientActivity();
             //MyDB d = new MyDB(this);
 
             final byte[] data = characteristic.getValue();
-           // final byte[] sensor = new byte[1];
+            System.out.println("lenght: " +data.length);
+            // final byte[] sensor = new byte[1];
             //sensor[] = 1;
             double[] V = getValues(data);
             double Z = V[0] * 0.000061;
@@ -259,36 +260,36 @@ private ClientActivity c = new ClientActivity();
                 }
             }
         } else if (UUID_BAR.equals(characteristic.getUuid())) {
-           // MyDB d = new MyDB(this);
+            // MyDB d = new MyDB(this);
 
             final byte[] data = characteristic.getValue();
             byte[] bar = new byte[3];
             bar[0] = data[2];
             bar[1] = data[1];
             bar[2] = data[0];
-           if (bar != null && bar.length > 0) {
+            if (bar != null && bar.length > 0) {
                 final StringBuilder stringBuilder = new StringBuilder(bar.length);
                 for(byte byteChar : bar)
                     stringBuilder.append(String.format("%02X ", byteChar));
 
 
-            double x = ((data[2] << 16 ) | (data[1] << 8) | data[0]) ;
+                double x = ((data[2] << 16 ) | (data[1] << 8) | data[0]) ;
 
-            double X = x / 4096;
-
-
-            double meter = X / 98.04;
-               DecimalFormat dX = new DecimalFormat("###0.000");
-               if ((X != 0) && (X > 0)) {
-                   intent.putExtra(EXTRA_DATA, dX.format(X) + " hPa " + dX.format(meter) + " m");
-                   if (socket != null){
-                       writeIntToSocket(4);
-                       writeBytesToSocket(data);
+                double X = x / 4096;
 
 
-                   }
+                double meter = X / 98.04;
+                DecimalFormat dX = new DecimalFormat("###0.000");
+                if ((X != 0) && (X > 0)) {
+                    intent.putExtra(EXTRA_DATA, dX.format(X) + " hPa " + dX.format(meter) + " m");
+                    if (socket != null){
+                        writeIntToSocket(4);
+                        writeBytesToSocket(data);
 
-               }
+
+                    }
+
+                }
             }
         }else  if (UUID_BATTERY.equals(characteristic.getUuid())) {
 
@@ -309,7 +310,7 @@ private ClientActivity c = new ClientActivity();
 
             //MyDB d = new MyDB(this);
             final byte[] data = characteristic.getValue();
-
+            System.out.println("LEngth:" +data.length);
             double t = byteArrayToDouble(data);
             System.out.println("TEMP " + t);
 
@@ -545,14 +546,13 @@ private ClientActivity c = new ClientActivity();
         }
         mBluetoothGatt.setCharacteristicNotification(characteristic, enabled);
         /**BluetoothGattDescriptor descriptor = characteristic.getDescriptor(
-                UUID.fromString(SampleGattAttributes.CLIENT_CHARACTERISTIC_CONFIG));
-
-        descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
-        mBluetoothGatt.writeDescriptor(descriptor);
-**/
+         UUID.fromString(SampleGattAttributes.CLIENT_CHARACTERISTIC_CONFIG));
+         descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+         mBluetoothGatt.writeDescriptor(descriptor);
+         **/
         // This is specific to Heart Rate Measurement.
         if ((!UUID_BATTERY.equals(characteristic.getUuid())) && (!UUID_DEVICE_NAME.equals(characteristic.getUuid())) && (!UUID_DEVICE.equals(characteristic.getUuid()))) {
-           BluetoothGattDescriptor descriptor = characteristic.getDescriptor(
+            BluetoothGattDescriptor descriptor = characteristic.getDescriptor(
                     UUID.fromString(SampleGattAttributes.CLIENT_CHARACTERISTIC_CONFIG));
             descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
             mBluetoothGatt.writeDescriptor(descriptor);

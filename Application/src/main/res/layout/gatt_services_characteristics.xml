@@ -67,6 +67,14 @@
                   android:text="@string/no_data"
                   android:textSize="18sp"/>
     </LinearLayout>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="149dp"
+        android:layout_height="35dp"
+        android:text="Read All"
+        android:id="@+id/readAll" />
+
     <ExpandableListView android:id="@+id/gatt_services_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
