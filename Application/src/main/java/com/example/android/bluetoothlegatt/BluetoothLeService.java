@@ -250,10 +250,8 @@ public class BluetoothLeService extends Service {
             if (data != null && data.length > 0) {
                 if (data != null && data.length > 0) {
                     if (socket != null){
-                        //writeBytesToSocket(sensor);
 
                         writeIntToSocket(1);
-
                         writeBytesToSocket(data);
                     }
 
