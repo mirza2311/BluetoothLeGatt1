@@ -57,7 +57,7 @@ public class DeviceControlActivity extends Activity {
 
     private TextView mConnectionState;
     private TextView mDataField;
-    private Button readAll;
+    //private Button readAll;
     private String mDeviceName;
     private String mDeviceAddress;
     private ExpandableListView mGattServicesList;
@@ -186,16 +186,7 @@ public class DeviceControlActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
         Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
-        readAll = (Button) findViewById(R.id.readAll);
-        readAll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-
-                Toast toast = Toast.makeText(getApplicationContext(), "test button click",Toast.LENGTH_SHORT);
-                toast.show();
-            }
-        });
 
     }
 

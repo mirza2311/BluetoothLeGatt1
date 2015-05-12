@@ -59,7 +59,7 @@ public class BluetoothLeService extends Service {
     private Socket socket;
     private DataOutputStream outputToClient;
 
-    private String IP ="194.47.32.106"  ;
+    private String IP ="192.168.1.95"  ;
     private int PORT = 8000;
     private boolean connected;
     private DataOutputStream dao;
@@ -237,6 +237,7 @@ public class BluetoothLeService extends Service {
             //MyDB d = new MyDB(this);
 
             final byte[] data = characteristic.getValue();
+
             System.out.println("lenght: " +data.length);
             // final byte[] sensor = new byte[1];
             //sensor[] = 1;
@@ -273,14 +274,14 @@ public class BluetoothLeService extends Service {
                     stringBuilder.append(String.format("%02X ", byteChar));
 
 
-                double x = ((data[2] << 16 ) | (data[1] << 8) | data[0]) ;
+                double x = ((data[2] * 65536 ) + (data[1] * 256) + data[0]) ;
 
                 double X = x / 4096;
 
 
                 double meter = X / 98.04;
                 DecimalFormat dX = new DecimalFormat("###0.000");
-                if ((X != 0) && (X > 0)) {
+
                     intent.putExtra(EXTRA_DATA, dX.format(X) + " hPa " + dX.format(meter) + " m");
                     if (socket != null){
                         writeIntToSocket(4);
@@ -289,7 +290,7 @@ public class BluetoothLeService extends Service {
 
                     }
 
-                }
+
             }
         }else  if (UUID_BATTERY.equals(characteristic.getUuid())) {
 
@@ -304,6 +305,12 @@ public class BluetoothLeService extends Service {
                     stringBuilder.append(String.format("%02X ", byteChar));
 
                 intent.putExtra(EXTRA_DATA, procent+ " %");
+                if (socket != null){
+                    writeIntToSocket(6);
+                    writeBytesToSocket(data);
+
+
+                }
             }
         }else if (UUID_TEMP.equals(characteristic.getUuid())) {
 
@@ -340,7 +347,7 @@ public class BluetoothLeService extends Service {
         double value;
 
 
-        int temp =( (b[1] << 8) | b[0]);
+        int temp =( (b[1] * 256) + b[0]);
         System.out.println("TEMP1 : " + temp);
         value = (42.5 + (temp / 480));
         return value;

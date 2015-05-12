@@ -18,6 +18,10 @@
           android:checkable="false"
           android:orderInCategory="1"
           android:showAsAction="ifRoom"/>
+    <item android:id="@+id/menu_tcpip"
+        android:title="@string/menu_tcpip"
+        android:orderInCategory="101"
+        android:showAsAction="ifRoom|withText"/>
     <item android:id="@+id/menu_scan"
           android:title="@string/menu_scan"
           android:orderInCategory="100"
@@ -29,4 +33,4 @@
           android:showAsAction="ifRoom|withText"/>
 
 </menu>
-<!-- From: file:/C:/Users/Christian/AndroidStudioProjects/BluetoothLeGatt1/Application/src/main/res/menu/main.xml -->
+<!-- From: file:/C:/Users/Mirza/AndroidStudioProjects/BluetoothLeGatt1/Application/src/main/res/menu/main.xml -->
