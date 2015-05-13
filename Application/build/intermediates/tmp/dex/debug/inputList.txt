@@ -1,7 +1,7 @@
-C:\Users\Christian\AndroidStudioProjects\BluetoothLeGatt1\Application\build\intermediates\classes\debug
-C:\Users\Christian\AndroidStudioProjects\BluetoothLeGatt1\Application\build\intermediates\pre-dexed\debug\internal_impl-21.0.2-73eeadaca8be8494bc7d5b1377453fc3b9ae7c2b.jar
-C:\Users\Christian\AndroidStudioProjects\BluetoothLeGatt1\Application\build\intermediates\pre-dexed\debug\support-annotations-21.0.2-3c61181487861980f54686a5e8f063ff04c1a14a.jar
-C:\Users\Christian\AndroidStudioProjects\BluetoothLeGatt1\Application\build\intermediates\pre-dexed\debug\classes-9dc818d3092bb4e4f2a2220affe7e8b922d4f008.jar
-C:\Users\Christian\AndroidStudioProjects\BluetoothLeGatt1\Application\build\intermediates\pre-dexed\debug\classes-dcbf51872d2c41472309b58807b8c781b173e7ba.jar
-C:\Users\Christian\AndroidStudioProjects\BluetoothLeGatt1\Application\build\intermediates\pre-dexed\debug\internal_impl-21.0.2-ffe1ac8baca115c8bf0f850e07a7930226399fe3.jar
-C:\Users\Christian\AndroidStudioProjects\BluetoothLeGatt1\Application\build\intermediates\pre-dexed\debug\classes-57a69e6bc409c61e2a4656971469abfc5f2e45fb.jar
+C:\Users\Mirza\AndroidStudioProjects\BluetoothLeGatt1\Application\build\intermediates\classes\debug
+C:\Users\Mirza\AndroidStudioProjects\BluetoothLeGatt1\Application\build\intermediates\pre-dexed\debug\internal_impl-21.0.2-bb71fa5d73f36b203ae1e82c2e0d3f0bb0d32397.jar
+C:\Users\Mirza\AndroidStudioProjects\BluetoothLeGatt1\Application\build\intermediates\pre-dexed\debug\support-annotations-21.0.2-8f9827245043942209860cd1d3d6d31df6b18e26.jar
+C:\Users\Mirza\AndroidStudioProjects\BluetoothLeGatt1\Application\build\intermediates\pre-dexed\debug\classes-8722cd821ff0cd8cfccefadab011abaf0ca14e83.jar
+C:\Users\Mirza\AndroidStudioProjects\BluetoothLeGatt1\Application\build\intermediates\pre-dexed\debug\classes-0e5fb3225bc79b9c0c4fe5592b8f1b99d3ac9d7e.jar
+C:\Users\Mirza\AndroidStudioProjects\BluetoothLeGatt1\Application\build\intermediates\pre-dexed\debug\internal_impl-21.0.2-ad1e64b32784ef65ae18841b2c762a5626f05442.jar
+C:\Users\Mirza\AndroidStudioProjects\BluetoothLeGatt1\Application\build\intermediates\pre-dexed\debug\classes-ee70510885deca4b7b51e18cfb15db30b9e31c41.jar

@@ -376,9 +376,9 @@ public class BluetoothLeService extends Service {
             lowHigh[b++] = low[i];
         }
 
-        int x = lowHigh[0] << 8 | lowHigh[1];
-        int y = lowHigh[2] << 8 | lowHigh[3];
-        int z = lowHigh[4] << 8 | lowHigh[5];
+        int x = (lowHigh[0] *256 )+ lowHigh[1];
+        int y = (lowHigh[2] * 256) + lowHigh[3];
+        int z = (lowHigh[4] * 256) + lowHigh[5];
 
         values[0] = x;
         values[1] = y;
